@@ -17,7 +17,7 @@ For this exercise, you should write *two different notebooks*. One script should
 
 | <div style="width:120px"></div>| Description |
 |---------|:-----------|
-|```in```| Contains the *fake_or_real_news* csv file used for the assignment as well as the Tfidf-vectorized text column as this (*X_vect.npz* and the corresponding labels (*y.npy*)|
+|```in```| Contains the *fake_or_real_news* csv file used for the assignment as well as the Tfidf-vectorized text column (*X_vect.npz*) and the corresponding labels (*y.npy*)|
 | ```out``` | Contains the output classification reports produced by running the two classification models|
 | ```src```  | Contains the Python scripts for vectorizing the data, utils for classification as well as creating and fitting logistic and neural network classification models |
 |```models```| Saved Tfidf-vectorizer, logistic and neural network classification models |
@@ -104,6 +104,9 @@ python3 src/vectorize.py --dataset <dataset> --lowercase <lowercase> --max_df <m
 
 
 ```
+# activate the virtual environment
+source env/bin/activate
+
 python3 src/logistic_classification.py --X_name <X_name> --y_name <y_name> --report_name <report_name>
 ```
 **Arguments:**
@@ -116,6 +119,9 @@ python3 src/logistic_classification.py --X_name <X_name> --y_name <y_name> --rep
 
 
 ```
+# activate the virtual environment
+source env/bin/activate
+
 python3 src/nn_classification.py --X_name <X_name> --y_name <y_name> --activation_function <activation_function> --hidden_layer_sizes  <hidden_layer_sizes> --report_name <report_name>
 ```
 **Arguments:**
@@ -132,5 +138,15 @@ python3 src/nn_classification.py --X_name <X_name> --y_name <y_name> --activatio
 
 
 ### Results
-The tables below showcase the classification report for the logistic classifion and the report for the neural network classification saved in the ```out``` folder.
+The tables below showcase the classification report for the logistic classifion and the report for the neural network classification of the *fake_or_real_news* dataset saved in the ```out``` folder.
+
+**Logistic Classification** 
+![Screenshot 2024-03-04 at 15 12 09](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/dd6918b5-3097-4970-b55a-dccc627b04c3)
+
+** Neural Network Classification**
+![Screenshot 2024-03-04 at 15 12 19](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/2f14f287-a52e-4db1-9f48-fee4643337b2)
+
+The results show that there is hardly any difference between running the logistic regression and neural network classifier for this dataset.
+
+
 
