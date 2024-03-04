@@ -143,7 +143,7 @@ The tables below showcase the classification report for the logistic classifion 
 **Logistic Classification** 
 ![Screenshot 2024-03-04 at 15 12 09](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/dd6918b5-3097-4970-b55a-dccc627b04c3)
 
-** Neural Network Classification**
+**Neural Network Classification**
 ![Screenshot 2024-03-04 at 15 12 19](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/2f14f287-a52e-4db1-9f48-fee4643337b2)
 
 The results show that there is hardly any difference between running the logistic regression and neural network classifier for this dataset.
