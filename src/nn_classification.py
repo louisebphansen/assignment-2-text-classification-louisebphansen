@@ -7,6 +7,10 @@ import os
 import argparse
 from joblib import dump, load
 from sklearn.neural_network import MLPClassifier
+import scipy as sp
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 
 # from my own utils script, import functions
 from clf_utils import load_and_split_data, save_classification_report
@@ -27,7 +31,7 @@ def argument_parser():
     return args
 
 # fit model and predict on test data
-def fit_and_predict(activation:str, hidden_layer_sizes:int, X_train: scipy.sparse._csr.csr_matrix, X_test: scipy.sparse._csr.csr_matrix, y_train: numpy.ndarray) -> numpy.ndarray:
+def fit_and_predict(activation:str, hidden_layer_sizes:int, X_train, X_test, y_train: np.ndarray) -> np.ndarray:
     '''
     Creates a neural network classifier and fits it to training data.
     The classifier is saved and used to predict on test data.
@@ -53,7 +57,7 @@ def fit_and_predict(activation:str, hidden_layer_sizes:int, X_train: scipy.spars
     classifier.fit(X_train, y_train)
 
     # save classification model
-    dump(classifier, os.path.join(models, "NN_classifier.joblib"))
+    dump(classifier, os.path.join('models', "NN_classifier.joblib"))
 
     # predict on test data
     y_pred = classifier.predict(X_test)

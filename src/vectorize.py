@@ -20,7 +20,7 @@ def argument_parser():
     parser.add_argument('--lowercase', type=bool,help ='whether to lowercase the text or not', default=True)
     parser.add_argument('--max_df', type=float, help='set max document frequency', default = 0.95)
     parser.add_argument('--min_df', type=float, help='set min document frequency', default = 0.05)
-    parser.add_argument('--max_features', type=int, help='how many features to include' ,default = 500)
+    parser.add_argument('--max_features', type=int, help='how many features to include', default = 500)
 
     args = vars(parser.parse_args())
     
@@ -48,7 +48,7 @@ def data_loader(csv_name: str) -> pd.DataFrame:
     return data
 
 # vectorize data
-def prep_data(data: pd.DataFrame, vectorizer: sklearn.feature_extraction.text.TfidfVectorizer):
+def prep_data(data: pd.DataFrame, vectorizer: TfidfVectorizer):
     '''
     Vectorizes the text column (i.e., our X variable) of a pd.DataFrame and saves this as a .npz file in the /in folder.
     Also saves our y variable (i.e., labels) as a .npy file in the /in folder.

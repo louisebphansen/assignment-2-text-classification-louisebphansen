@@ -10,7 +10,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 
 # load and split data from folder
-def load_and_split_data(X_name:str, y_name:str) -> scipy.sparse._csr.csr_matrix:
+def load_and_split_data(X_name:str, y_name:str):
     '''
     Loads vectorizes X and y variables from /in folder and splits them into training and testing data.
 
@@ -34,7 +34,7 @@ def load_and_split_data(X_name:str, y_name:str) -> scipy.sparse._csr.csr_matrix:
     return X_train, X_test, y_train, y_test
 
 # save classification report
-def save_classification_report(y_test: numpy.ndarray, y_pred: numpy.ndarray, report_name: str):
+def save_classification_report(y_test: np.ndarray, y_pred: np.ndarray, report_name: str):
     '''
     Create and save classification report.
 
