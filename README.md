@@ -1,1 +1,1 @@
-# assignment-2-text-classification-louisebphansen
+# Assignment 2 - Text classification benchmarks
