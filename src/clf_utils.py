@@ -1,6 +1,10 @@
 '''
-This script contains classification utils for splitting into train and test data as 
-well as saving the classification report.
+LANGUAGE ANALYTICS @ AARHUS UNIVERSITY, ASSIGNMENT 2: Text classification
+
+AUTHOR: Louise Brix Pilegaard Hansen
+
+DESCRIPTION:
+This script contains classification utils for splitting into train and test data as well as saving the classification report.
 '''
 # import packages and modules
 import os
@@ -12,7 +16,7 @@ from sklearn import metrics
 # load and split data from folder
 def load_and_split_data(X_name:str, y_name:str):
     '''
-    Loads vectorizes X and y variables from /in folder and splits them into training and testing data.
+    Loads vectorized X and y variables from /in folder and splits them into training and testing data.
 
     Arguments:
         - X_name: name of .npz file saved in /in folder

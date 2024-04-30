@@ -11,9 +11,18 @@ import scipy as sp
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn import metrics
+from codecarbon import EmissionsTracker
+from codecarbon import track_emissions
 
 # from my own utils script, import functions
 from clf_utils import load_and_split_data, save_classification_report
+
+# define emissionstracker to track CO2 emissions (for assignment 5)
+tracker = EmissionsTracker(project_name="assignment2_neural_network_subtasks",
+                           experiment_id="neural_network",
+                           output_dir='emissions',
+                           output_file="emissions_neural_network.csv")
+
 
 # define argument parser
 def argument_parser():
@@ -53,17 +62,37 @@ def fit_and_predict(activation:str, hidden_layer_sizes:int, X_train, X_test, y_t
                            max_iter=1000,
                            random_state = 2830)
 
+    # track emissions for model fitting task
+    tracker.start_task('Fit neural network')
+
     # fit on training data
     classifier.fit(X_train, y_train)
+
+    # stop emission of task when fitting is done
+    fitting_emissions = tracker.stop_task()
 
     # save classification model
     dump(classifier, os.path.join('models', "NN_classifier.joblib"))
 
+    # track emissions for model prediction
+    tracker.start_task('Predict using neural network')
+
     # predict on test data
     y_pred = classifier.predict(X_test)
 
+    # stop tracker for task
+    predict_emissions = tracker.stop_task()
+
+    # stop tracker completely
+    tracker.stop()
+
     return y_pred
 
+# create new tracker using a decorator to track emissions for running the entire script (i.e., track when running the main function)
+@track_emissions(project_name="assignment2_nn_full_analysis",
+                experiment_id="neural_network_full",
+                output_dir='emissions',
+                output_file="emissions_neural_network_FULL.csv")
 def main():
 
     # parse arguments
