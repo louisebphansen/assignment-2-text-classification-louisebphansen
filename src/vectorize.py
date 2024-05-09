@@ -21,7 +21,7 @@ from codecarbon import track_emissions
 tracker = EmissionsTracker(project_name="assignment2_vectorize_subtasks",
                            experiment_id="vectorizing",
                            output_dir='emissions',
-                           output_file="emissions_vectorize.csv")
+                           output_file="assignment2_vectorize_subtasks.csv")
 
 # define argument parser
 def argument_parser():
@@ -49,7 +49,6 @@ def data_loader(csv_name: str) -> pd.DataFrame:
     
     Returns:
         - data: pandas dataframe
-
     '''
 
     # load dataframe from folder
@@ -91,7 +90,7 @@ def prep_data(data: pd.DataFrame, vectorizer: TfidfVectorizer):
     # save y variable
     np.save(os.path.join('in', 'y.npy'), y)
 
-def vectorize_data(dataset, lowercase, max_df, min_df, max_features):
+def vectorize_data(dataset: str, lowercase: bool, max_df: float, min_df: float, max_features: int):
 
     '''
     This function loads a csv file to a pandas dataframe, Tfidf-vectorizes it and saved the vectorized
@@ -132,7 +131,7 @@ def vectorize_data(dataset, lowercase, max_df, min_df, max_features):
 @track_emissions(project_name="assignment2_vectorize_full",
                 experiment_id="vectorize_full",
                 output_dir='emissions',
-                output_file="emissions_vectorize_FULL.csv")
+                output_file="vectorize_FULL_emissions.csv")
 def main():
     # parse arguments
     args = argument_parser()

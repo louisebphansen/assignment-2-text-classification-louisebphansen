@@ -20,13 +20,13 @@ from codecarbon import EmissionsTracker
 from codecarbon import track_emissions
 
 # from my own utils script for this repo, import functions
-from clf_utils import load_and_split_data, save_classification_report
+from clf_utils import load_and_split_data, save_classification_report, cross_validate
 
 # define emissionstracker to track CO2 emissions (for assignment 5)
 tracker = EmissionsTracker(project_name="assignment2_logistic_regression_subtasks",
                            experiment_id="logistic_regression",
                            output_dir='emissions',
-                           output_file="emissions_logistic_regression.csv")
+                           output_file="assignment2_logistic_subtasks_emissions.csv")
 
 # define argument parser
 def argument_parser():
@@ -57,50 +57,80 @@ def fit_and_predict(X_train, X_test, y_train: np.ndarray) -> np.ndarray:
     
     '''
 
-    # track emissions for model fitting task
-    tracker.start_task('Fitting logistic model')
-
     # create logistic classifier
     classifier = LogisticRegression(random_state=2830).fit(X_train, y_train)
-
-    # stop emission of task when fitting is done
-    fitting_emissions = tracker.stop_task()
 
     # save classifier in 'models' folder
     dump(classifier, os.path.join('models', "LR_classifier.joblib"))
 
-    # track emissions for model prediction
-    tracker.start_task('Predict using logistic model')
-
     # predict on test data
     y_pred = classifier.predict(X_test)
 
-    # stop tracker for task
-    predict_emissions = tracker.stop_task()
+    return y_pred
 
-    # stop tracker completely
+
+def run_classification(X_name:str, y_name:str, report_name:str):
+
+    '''
+    Function to run full classification analysis; loading training and test data, fit logistic classifier and predict on unseen data,
+    save classification report and perform cross-validation. Classification report and cross-validation plot are saved in the /out folder.
+
+    Arguments:
+        - X_name: name of saved input data in the /in folder
+        - y_name: name of saved target data in the /in folder
+        - report_name: what to call the classification report 
+
+    Returns:
+        None
+    '''
+
+    # load data and split into train and test
+    X_train, X_test, y_train, y_test = load_and_split_data(X_name, y_name)
+
+    # track emissions for model fitting task
+    tracker.start_task('Fitting logistic model')
+
+    # fit model on training data and predict from test data
+    y_pred = fit_and_predict(X_train, X_test, y_train)
+
+    # stop track emission of task when fitting is done
+    fitting_emissions = tracker.stop_task()
+
+    # save classification report
+    save_classification_report(y_test, y_pred, report_name)
+
+    # perform cross-validation and save plot
+
+    # track cross validation task
+    tracker.start_task('Cross validation, logistic')
+
+    estimator = LogisticRegression(random_state=2830)
+    cross_validate(X_name, y_name, estimator, 'Logistic Regression', 20, 'logistic_regression_cv.png')
+
+    # stop tracking of task and stop tracking in general
+    cv_emissions = tracker.stop_task()
     tracker.stop()
 
-    return y_pred
 
 # create new tracker using a decorator to track emissions for running the entire script
 @track_emissions(project_name="assignment2_logistic_full",
                 experiment_id="logistic_regression_full",
                 output_dir='emissions',
-                output_file="emissions_logistic_regression_FULL.csv")
-
+                output_file="logistic_regression_FULL_emissions.csv")
 def main():
     # parse arguments
    args = argument_parser()
 
     # load data and split into train and test
-   X_train, X_test, y_train, y_test = load_and_split_data(args['X_name'], args['y_name'])
+   #X_train, X_test, y_train, y_test = load_and_split_data(args['X_name'], args['y_name'])
 
     # fit model on training data and predict from test data
-   y_pred = fit_and_predict(X_train, X_test, y_train)
+   #y_pred = fit_and_predict(X_train, X_test, y_train)
 
     # save classification report
-   save_classification_report(y_test, y_pred, args['report_name'])
+   #save_classification_report(y_test, y_pred, args['report_name'])
+
+   run_classification(args['X_name'], args['y_name'], args['report_name'])
 
 if __name__ == '__main__':
    main()

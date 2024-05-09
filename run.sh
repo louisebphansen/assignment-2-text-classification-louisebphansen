@@ -1,5 +1,7 @@
 source env/bin/activate
 
+unzip data.zip
+
 python3 src/vectorize.py
 
 python3 src/logistic_classification.py
