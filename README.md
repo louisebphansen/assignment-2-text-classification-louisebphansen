@@ -161,6 +161,8 @@ The tables below showcase the classification report for the logistic classifion 
 
 **Loss Curve for Neural Network Classifier**
 
+![image](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/7c471aa8-fa13-4258-968a-4699bfa590a5)
+
 
 
 ### Discussion
