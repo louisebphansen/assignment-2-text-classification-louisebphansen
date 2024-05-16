@@ -20,7 +20,7 @@ from codecarbon import EmissionsTracker
 from codecarbon import track_emissions
 
 # from my own utils script for this repo, import functions
-from clf_utils import load_and_split_data, save_classification_report, cross_validate
+from clf_utils import load_and_split_data, save_classification_report
 
 # define emissionstracker to track CO2 emissions (for assignment 5)
 tracker = EmissionsTracker(project_name="assignment2_logistic_regression_subtasks",
@@ -72,8 +72,8 @@ def fit_and_predict(X_train, X_test, y_train: np.ndarray) -> np.ndarray:
 def run_classification(X_name:str, y_name:str, report_name:str):
 
     '''
-    Function to run full classification analysis; loading training and test data, fit logistic classifier and predict on unseen data,
-    save classification report and perform cross-validation. Classification report and cross-validation plot are saved in the /out folder.
+    Function to run full classification analysis; loading training and test data, fit logistic classifier and predict on unseen data.
+    Classification report is saved in the /out folder.
 
     Arguments:
         - X_name: name of saved input data in the /in folder
@@ -99,16 +99,6 @@ def run_classification(X_name:str, y_name:str, report_name:str):
     # save classification report
     save_classification_report(y_test, y_pred, report_name)
 
-    # perform cross-validation and save plot
-
-    # track cross validation task
-    tracker.start_task('Cross validation, logistic')
-
-    estimator = LogisticRegression(random_state=2830)
-    cross_validate(X_name, y_name, estimator, 'Logistic Regression', 20, 'logistic_regression_cv.png')
-
-    # stop tracking of task and stop tracking in general
-    cv_emissions = tracker.stop_task()
     tracker.stop()
 
 

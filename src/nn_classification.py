@@ -18,9 +18,10 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 from codecarbon import EmissionsTracker
 from codecarbon import track_emissions
+import matplotlib.pyplot as plt
 
 # from my own utils script, import functions
-from clf_utils import load_and_split_data, save_classification_report, cross_validate
+from clf_utils import load_and_split_data, save_classification_report
 
 # define emissionstracker to track CO2 emissions (for assignment 5)
 tracker = EmissionsTracker(project_name="assignment2_neural_network_subtasks",
@@ -73,7 +74,14 @@ def fit_and_predict(activation:str, hidden_layer_sizes:tuple, X_train, X_test, y
     # save classification model
     dump(classifier, os.path.join('models', "NN_classifier.joblib"))
 
-    # predict on test data
+    # plot loss curve as save to png
+    plt.plot(classifier.loss_curve_)
+    plt.title("Loss curve during training", fontsize=14)
+    plt.xlabel('Iterations')
+    plt.ylabel('Loss score')
+    plt.savefig(os.path.join('out', 'loss_curve_nn.png'))
+
+    # use model to predict on test data
     y_pred = classifier.predict(X_test)
 
     return y_pred
@@ -81,8 +89,7 @@ def fit_and_predict(activation:str, hidden_layer_sizes:tuple, X_train, X_test, y
 def run_classification_nn(X_name:str, y_name:str, activation:str, hidden_layer_sizes:tuple, report_name:str):
 
     '''
-    Function to run full classification analysis; loading training and test data, fit neural network and predict on unseen data,
-    save classification report and perform cross-validation. Classification report and cross-validation plot are saved in the /out folder.
+    Function to run full classification analysis; loading training and test data, fit neural network and predict on unseen data. Classification report is saved in the /out folder.
 
     Arguments:
         - X_name: name of saved input data in the /in folder
@@ -108,21 +115,7 @@ def run_classification_nn(X_name:str, y_name:str, activation:str, hidden_layer_s
 
     # save classification report
     save_classification_report(y_test, y_pred, report_name)
-
-    # perform cross-validation and save plot
-
-    # track cross-validation
-    tracker.start_task('Cross validation, neural network')
     
-    estimator = MLPClassifier(activation = activation,
-                           hidden_layer_sizes = tuple(hidden_layer_sizes),
-                           max_iter=1000,
-                           random_state = 2830)
-    
-    cross_validate(X_name, y_name, estimator, 'Neural Network', 20, 'neural_network_cv.png')
-
-    cv_emissions = tracker.stop_task()
-
     # stop tracker completely
     tracker.stop()
 
