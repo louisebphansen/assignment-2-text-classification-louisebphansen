@@ -162,6 +162,7 @@ The tables below showcase the classification report for the logistic classifion 
 **Loss Curve for Neural Network Classifier**
 
 
+
 ### Discussion
 The results from the two classification models show that there is hardly any difference between running the logistic regression and neural network classifier for this dataset. 
 Interestingly, this indicates that the added complexity in the neural network classifier compared to the logistic classification does not result in better performance accuracies. The results thus demonstrates that more complex, computationally expensive models are not always the answer, especially not for more simple, binary problems such as the problem on hand. This further becomes an important notion when relating these results to their carbon emissions as done in [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen.git).
