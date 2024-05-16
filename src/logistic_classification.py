@@ -111,15 +111,6 @@ def main():
     # parse arguments
    args = argument_parser()
 
-    # load data and split into train and test
-   #X_train, X_test, y_train, y_test = load_and_split_data(args['X_name'], args['y_name'])
-
-    # fit model on training data and predict from test data
-   #y_pred = fit_and_predict(X_train, X_test, y_train)
-
-    # save classification report
-   #save_classification_report(y_test, y_pred, args['report_name'])
-
    run_classification(args['X_name'], args['y_name'], args['report_name'])
 
 if __name__ == '__main__':

@@ -130,14 +130,6 @@ def main():
     args = argument_parser()
 
     run_classification_nn(args['X_name'], args['y_name'], args['activation_function'], args['hidden_layer_sizes'], args['report_name'])
-    # load data and split into test and train
-   #X_train, X_test, y_train, y_test = load_and_split_data(args['X_name'], args['y_name'])
-
-    # fit classification model and predict on new data
-   #y_pred = fit_and_predict(args['activation_function'], args['hidden_layer_sizes'], X_train, X_test, y_train)
-
-    # create and save classification report
-   #save_classification_report(y_test, y_pred, args['report_name'])
 
 if __name__ == '__main__':
    main()
