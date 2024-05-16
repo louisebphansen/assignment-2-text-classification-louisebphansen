@@ -147,12 +147,11 @@ python3 src/nn_classification.py --X_name <X_name> --y_name <y_name> --activatio
 
 
 ### Results
-The tables below showcase the classification report for the logistic classifion and the report for the neural network classification of the *fake_or_real_news* dataset saved in the ```out``` folder.
+The tables below showcase the classification report for the logistic classifion and the report and loss curve for the neural network classification saved in the ```out``` folder.
 
 **Logistic Classification** 
 
 ![Screenshot 2024-03-04 at 15 12 09](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/dd6918b5-3097-4970-b55a-dccc627b04c3)
-
 
 
 **Neural Network Classification**
@@ -163,16 +162,18 @@ The tables below showcase the classification report for the logistic classifion 
 
 ![image](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/7c471aa8-fa13-4258-968a-4699bfa590a5)
 
-
+The loss curve for the neural network classifier show that the classifier is learning well, as the curve is slowly decreasing for more epochs run. 
 
 ### Discussion
-The results from the two classification models show that there is hardly any difference between running the logistic regression and neural network classifier for this dataset. 
+The results from the two classification models show that there is hardly any difference between running the logistic regression and neural network classifier for this dataset.
 Interestingly, this indicates that the added complexity in the neural network classifier compared to the logistic classification does not result in better performance accuracies. The results thus demonstrates that more complex, computationally expensive models are not always the answer, especially not for more simple, binary problems such as the problem on hand. This further becomes an important notion when relating these results to their carbon emissions as done in [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen.git).
+
 
 #### Limitations
 When considering the limitations of this approach, it is important to mention that TF-IDF vectorizing is not necessarily the best way to represent text to a model. One could consider using more sophisticated approaches, for example by using word embedding models such as word2vec or GloVe or transformers such as BERT. This could yield more accurate and contextual representations of the input texts. However, as the above results show that we actually get a decent result using TF-IDF vectorization, added complexity may yet again not be the answer.
 
-
+Furthermore, one could consider employing cross-validation as a way of comparing model performance across train-test splits, to ensure that the performance is not solely dependent on the chosen train-test split.
 
 ### A note on carbon emissions
 
+The measured CO2-eq emissions for this project was .. See [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen.git) for a further discussion of this.
