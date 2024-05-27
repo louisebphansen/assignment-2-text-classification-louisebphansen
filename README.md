@@ -7,34 +7,35 @@ All code was created by me, but code provided in the notebooks for the course ha
 
 ### Assignment description
 
-For this exercise, you should write *two different scripts*. One script should train a logistic regression classifier on the data; the second script should train a neural network on the same dataset. Both script should do the following:
+For this exercise, you should write *two different scripts*. One script should train a logistic regression classifier on the data; the second script should train a neural network on the same dataset. Both scripts should do the following:
 
-- Save the classification report to a text file the folder called ```out```
+- Save the classification report as a text file to the folder called ```out```
 - Save the trained models and vectorizers to the folder called ```models```
 
 ### Contents of the repository
 
 | <div style="width:120px"></div>| Description |
 |---------|:-----------|
-|```data.zip```| Zipfile containing the *fake_or_real_news* csv file used for the assignment as well as the Tfidf-vectorized text column (*X_vect.npz*) and the corresponding labels (*y.npy*). Unzipping it creates a folder called '/in', containing tthese files to be used for the analysis |
-| ```out``` | Contains the output classification reports produced by running the two classification models as well as a loss curve for the neural network classification model |
+|```data.zip```| Zipped file containing the *fake_or_real_news.csv* csv file used for the assignment as well as the Tfidf-vectorized text column (*X_vect.npz*) and the corresponding labels (*y.npy*). Unzipping it creates a folder called ```in```, which contains these files used for the analysis |
+| ```out``` | Contains the output classification reports produced by running the two classification models as well as a plot of the loss curve for the neural network classification model |
 | ```src```  | Contains the Python scripts for vectorizing the data, utils for classification as well as creating and fitting logistic and neural network classification models |
 |```models```| Saved Tfidf-vectorizer, logistic and neural network classification models |
-| ```run.sh```    | Bash script for running all code |
+| ```run.sh```    | Bash script for running all code with default arguments |
 | ```setup.sh```  | Bash script for setting up virtual environment |
 | ```requirements.txt```  | Packages required to run the code|
+|```emissions```|Contains csv files with information about how much CO2 is emitted when running the code, which is used for [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen)|
 
 ### Methods
-This project contains the code to vectorize a dataset of fake and real news texts and use this vectorized text as the input to two seperate classifiers, predicting whether the text is fake or real news. 
+This project contains the code to vectorize a dataset of fake and real news articles and use this vectorized text as the input to two seperate classifiers, predicting whether the text is fake or real news. 
 
-More specifically, the script ```src/vectorize.py``` creates a Tf-Idf vectorizer using Scikit-learn. This vectorizer is then used to vectorize the text in the dataset, which is saved in the ```in``` folder. The Tf-Idf vectorizer is saved in the ```models```folder.
+More specifically, the script ```src/vectorize.py``` creates a Tf-Idf vectorizer using SciKit-Learn. This vectorizer is then used to vectorize the text in the dataset. The Tf-Idf vectorizer is saved in the ```models```folder and the vectorized text is saved in the ```in``` folder (which is created once the data.zip is unzipped).
 
-```src/clf_utils.py``` contains util functions for classification. These include functions to load the vectorized dataset and split this into train and test datasets (80/20 split) as well as a function for creating and saving a classification report.
+```src/clf_utils.py``` contains util functions for classification. These include functions to load the vectorized dataset and split this into train and test sets (80/20 split) as well as a function for creating and saving a classification report.
 
-```logistic_classification.py``` and ```nn_classification.py``` creates and fits a logistic regression classification model and a neural network classification model, respectively, on the vectorized and train-test split dataset. The model is trained on the train-split of the data whereas the test-split is used for predicting. The output classification reports of both scripts are saved in the ```out```folder, showcasing trues versus predicted lbels for the test dataset. The fitted models are saved in the ```models```folder.
+```logistic_classification.py``` and ```nn_classification.py``` creates and fits a logistic regression classification model and a neural network classification model, respectively, on the vectorized and train-test split dataset. The model is trained on the train-split of the data whereas the test-split is used for predicting. The output classification reports of both scripts are saved in the ```out```folder, showcasing trues versus predicted labels for the test dataset. The fitted models are saved in the ```models```folder.
 
 ### Data
-The data used for this assignment is the *fake_or_real_news* dataset, which consists of 6335 news stories labelled as either fake or real news. The data is placed in a folder called 'in' which will be create when unzipping the *data.zip* file. See the **Run Code** for specifications. The dataset can be found in [this link](https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news).
+The data used for this assignment is the *fake_or_real_news* dataset, which consists of 6335 news stories labelled as either fake or real news. The dataset can be found in [this link](https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news). The data can be found in this repository by unzipping *data.zip*. See the **Usage** section for specifications.
 
 ### Usage
 
@@ -85,7 +86,7 @@ Alternatively, the script(s) can be run seperately with different arguments:
 
 ```
 # activate the virtual environment
-source env/bin/activate
+source ./env/bin/activate
 
 # unzip data folder to create /in folder containing the data
 unzip data.zip
@@ -96,18 +97,18 @@ python3 src/vectorize.py --dataset <dataset> --lowercase <lowercase> --max_df <m
 
 - **Dataset:** Name of dataset placed in the ```in``` folder. Must be a csv file containing columns 'text' (input variable) and 'label' (target variable). Default: fake_or_real_news.csv
 
-- **Lowercase:** Whether the test should be converted to lowercase when vectorized. Default: True
+- **Lowercase:** Whether the text should be converted to lowercase when vectorized. Default: True
 
 - **Max_df:** Maximum document frequency. Default: 0.95
 
 - **Min_df:** Minimum document frequency. Default: 0.05
 
-- **Max_features:** Maximum number of features to include. Default = 500
+- **Max_features:** Maximum number of features to include. Default: 500
 
 
 ```
 # activate the virtual environment
-source env/bin/activate
+source ./env/bin/activate
 
 # unzip data folder to create /in folder containing the data
 unzip data.zip
