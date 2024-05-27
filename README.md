@@ -120,14 +120,14 @@ python3 src/logistic_classification.py --X_name <X_name> --y_name <y_name> --rep
 
 - **X_name:** Name of the saved and vectorized text column. Must be a .npz file saved in the /in folder. Default: X_vect.npz
 
-- **Y_name:** Name of array containing labels. Must be a .npy file saved in the /in folder'. Default: y.npy
+- **Y_name:** Name of array containing labels. Must be a .npy file saved in the /in folder. Default: y.npy
 
 - **Report_name:** Name of the output classification report. Default: logistic_classification_report.txt
 
 
 ```
 # activate the virtual environment
-source env/bin/activate
+source ./env/bin/activate
 
 # unzip data folder to create /in folder containing the data
 unzip data.zip
@@ -138,7 +138,7 @@ python3 src/nn_classification.py --X_name <X_name> --y_name <y_name> --activatio
 
 - **X_name:** Name of the saved and vectorized text column. Must be a .npz file saved in the /in folder. Default: X_vect.npz
 
-- **Y_name:** Name of array containing labels. Must be a .npy file saved in the /in folder'. Default: y.npy
+- **Y_name:** Name of array containing labels. Must be a .npy file saved in the /in folder. Default: y.npy
 
 - **Activation_function:** What activation function to use for the classifier. Default: logistic
 
@@ -148,7 +148,7 @@ python3 src/nn_classification.py --X_name <X_name> --y_name <y_name> --activatio
 
 
 ### Results
-The tables below showcase the classification report for the logistic classifion and the report and loss curve for the neural network classification saved in the ```out``` folder.
+The tables below show the classification report for the logistic classifion and the report and loss curve for the neural network classification, all saved in the ```out``` folder.
 
 **Logistic Classification** 
 
@@ -163,18 +163,17 @@ The tables below showcase the classification report for the logistic classifion 
 
 ![image](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/7c471aa8-fa13-4258-968a-4699bfa590a5)
 
-The loss curve for the neural network classifier show that the classifier is learning well, as the curve is slowly decreasing for more epochs run. 
+The loss curve for the neural network classifier shows that the classifier is learning well, as the curve is slowly decreasing as the number of epochs is increasing. 
 
 ### Discussion
-The results from the two classification models show that there is hardly any difference between running the logistic regression and neural network classifier for this dataset.
-Interestingly, this indicates that the added complexity in the neural network classifier compared to the logistic classification does not result in better performance accuracies. The results thus demonstrates that more complex, computationally expensive models are not always the answer, especially not for more simple, binary problems such as the problem on hand. This further becomes an important notion when relating these results to their carbon emissions as done in [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen.git).
+The results from the two classification models show that they are both very good at distinguishing real and fake news from each other. Interestingly, there is hardly any difference between running the logistic regression and neural network classifier for this dataset. This indicates that the added complexity in the neural network classifier compared to the logistic classification does not result in better performance accuracies. The results thus demonstrates that more complex, computationally expensive models are not always the answer, especially not for more simple, binary problems such as the problem on hand. This further becomes an important notion when relating these results to their carbon emissions as done in [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen.git).
 
 
 #### Limitations
-When considering the limitations of this approach, it is important to mention that TF-IDF vectorizing is not necessarily the best way to represent text to a model. One could consider using more sophisticated approaches, for example by using word embedding models such as word2vec or GloVe or transformers such as BERT. This could yield more accurate and contextual representations of the input texts. However, as the above results show that we actually get a decent result using TF-IDF vectorization, added complexity may yet again not be the answer.
+When considering the limitations of the approach presented in this project, it is important to mention that TF-IDF vectorizing is not necessarily the best way to embed text. One could consider using more sophisticated approaches, for example by using word embedding models such as word2vec or GloVe or pre-trained transformer models such as BERT. This could yield more accurate and contextual representations of the input texts. However, as the above results show that we actually get a good result using 'only' TF-IDF vectorization, added complexity may yet again not be the answer.
 
-Furthermore, one could consider employing cross-validation as a way of comparing model performance across train-test splits, to ensure that the performance is not solely dependent on the chosen train-test split.
+On another note, one could consider employing cross-validation as a way of comparing model performance across train-test splits, to ensure that the performance of the models are not solely dependent on the chosen train-test splits.
 
 ### A note on carbon emissions
 
-The measured CO2-eq emissions for this project was .. See [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen.git) for a further discussion of this.
+CodeCarbon was used to measure the environmental impact of the code in this repository. The measured CO2-equivalent emissions for this project was 0.0067 Kg. See [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen) for a further discussion of this. 
