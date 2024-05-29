@@ -16,7 +16,7 @@ For this exercise, you should write *two different scripts*. One script should t
 
 | <div style="width:120px"></div>| Description |
 |---------|:-----------|
-|```data.zip```| Zipped file containing the *fake_or_real_news.csv* csv file used for the assignment as well as the Tfidf-vectorized text column (*X_vect.npz*) and the corresponding labels (*y.npy*). Unzipping it creates a folder called ```in```, which contains these files used for the analysis |
+|```data.zip```| Zipped file containing the *fake_or_real_news.csv* file used for the assignment as well as the Tfidf-vectorized text column (*X_vect.npz*) and the corresponding labels (*y.npy*). Unzipping it creates a folder called ```in```, which contains these files used for the analysis |
 | ```out``` | Contains the output classification reports produced by running the two classification models as well as a plot of the loss curve for the neural network classification model |
 | ```src```  | Contains the Python scripts for vectorizing the data, utils for classification as well as creating and fitting logistic and neural network classification models |
 |```models```| Saved Tfidf-vectorizer, logistic and neural network classification models |
@@ -28,11 +28,11 @@ For this exercise, you should write *two different scripts*. One script should t
 ### Methods
 This project contains the code to vectorize a dataset of fake and real news articles and use this vectorized text as the input to two seperate classifiers, predicting whether the text is fake or real news. 
 
-More specifically, the script ```src/vectorize.py``` creates a Tf-Idf vectorizer using SciKit-Learn. This vectorizer is then used to vectorize the text in the dataset. The Tf-Idf vectorizer is saved in the ```models```folder and the vectorized text is saved in the ```in``` folder (which is created once the data.zip is unzipped).
+More specifically, the script ```src/vectorize.py``` creates a Tf-Idf vectorizer using SciKit-Learn. This vectorizer is then used to vectorize the text in the dataset. The Tf-Idf vectorizer is saved in the ```models``` folder and the vectorized text is saved in the ```in``` folder (which is created once the data.zip is unzipped).
 
 ```src/clf_utils.py``` contains util functions for classification. These include functions to load the vectorized dataset and split this into train and test sets (80/20 split) as well as a function for creating and saving a classification report.
 
-```logistic_classification.py``` and ```nn_classification.py``` creates and fits a logistic regression classification model and a neural network classification model, respectively, on the vectorized and train-test split dataset. The model is trained on the train-split of the data whereas the test-split is used for predicting. The output classification reports of both scripts are saved in the ```out```folder, showcasing trues versus predicted labels for the test dataset. The fitted models are saved in the ```models```folder.
+```logistic_classification.py``` and ```nn_classification.py``` creates and fits a logistic regression classification model and a neural network classification model, respectively, on the vectorized and train-test split dataset. The model is trained on the train-split of the data whereas the test-split is used for predicting. The output classification reports of both scripts are saved in the ```out``` folder. The fitted models are saved in the ```models``` folder.
 
 ### Data
 The data used for this assignment is the *fake_or_real_news* dataset, which consists of 6335 news stories labelled as either fake or real news. The dataset can be found in [this link](https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news). The data can be found in this repository by unzipping *data.zip*. See the **Usage** section for specifications.
@@ -77,7 +77,7 @@ To run the code in this repo with predefined/default arguments, run:
 bash run.sh
 ```
 
-This will activate the virual environment and unzip the *data.zip* file to create the ```in``` folder containing the *fake_or_real_news.csv* data. Next, the ```src/vectorize.py```, ```src/logistic_classification.py``` and ```src/nn_classification.py``` scripts will be run with default arguments. The vectorized text is saved in the newly created ```in``` folder, and the classification reports and loss curve plot are saved in the ```out```folder.
+This will activate the virual environment and unzip the *data.zip* file to create the ```in``` folder containing the *fake_or_real_news.csv* data. Next, the ```src/vectorize.py```, ```src/logistic_classification.py``` and ```src/nn_classification.py``` scripts will be run with default arguments. The vectorized text is saved in the newly created ```in``` folder, and the classification reports and loss curve plot are saved in the ```out``` folder.
 
 ##### Define arguments yourself
 Alternatively, the script(s) can be run seperately with different arguments:
@@ -161,14 +161,14 @@ The tables below show the classification report for the logistic classifion and 
 
 ![image](https://github.com/louisebphansen/assignment-2-text-classification-louisebphansen/assets/75262659/7c471aa8-fa13-4258-968a-4699bfa590a5)
 
-The loss curve for the neural network classifier shows that the classifier is learning well, as the curve is slowly decreasing as the number of epochs is increasing. 
+The loss curve for the neural network classifier shows that the classifier is learning well, as the curve is slowly decreasing as the number of iterations are increasing. 
 
 ### Discussion
 The results from the two classification models show that they are both very good at distinguishing real and fake news from each other. Interestingly, there is hardly any difference between running the logistic regression and neural network classifier for this dataset. This indicates that the added complexity in the neural network classifier compared to the logistic classification does not result in better performance accuracies. The results thus demonstrates that more complex, computationally expensive models are not always the answer, especially not for more simple, binary problems such as the problem on hand. This further becomes an important notion when relating these results to their carbon emissions as done in [Assignment 5](https://github.com/louisebphansen/assignment-5-evaluating-environmental-impact-louisebphansen.git).
 
 
 #### Limitations
-When considering the limitations of the approach presented in this project, it is important to mention that TF-IDF vectorizing is not necessarily the best way to embed text. One could consider using more sophisticated approaches, for example by using word embedding models such as word2vec or GloVe or pre-trained transformer models such as BERT. This could yield more accurate and contextual representations of the input texts. However, as the above results show that we actually get a good result using 'only' TF-IDF vectorization, added complexity may yet again not be the answer.
+When considering the limitations of the approach presented in this project, it is important to mention that TF-IDF vectorizing is not necessarily the best way to embed text. One could consider using more sophisticated approaches, for example pre-trained transformer models such as BERT. This could yield more accurate and contextual representations of the input texts. However, as the above results show that we actually get a good result using 'only' TF-IDF vectorization, added complexity may yet again not be the answer.
 
 On another note, one could consider employing cross-validation as a way of comparing model performance across train-test splits, to ensure that the performance of the models are not solely dependent on the chosen train-test splits.
 
